@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PesananResource\Pages;
 use App\Filament\Resources\PesananResource\RelationManagers;
 use App\Models\Pesanan;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,8 +24,13 @@ class PesananResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('userID')
+                ->label('User ID')
+                ->options(User::all()->pluck('name', 'id'))
+                ->searchable(),
                 Forms\Components\TextInput::make('total_harga')
                 ->label('Total_Harga')
+                ->maxLength(10)
                 ->required(),
             ]);
     }
@@ -33,6 +39,7 @@ class PesananResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('userID')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('total_harga')->sortable()->searchable(),
             ])
             ->filters([

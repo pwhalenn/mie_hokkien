@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ReservasiResource\Pages;
 use App\Filament\Resources\ReservasiResource\RelationManagers;
 use App\Models\Reservasi;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,6 +24,10 @@ class ReservasiResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('userID')
+                ->label('User ID')
+                ->options(User::all()->pluck('name', 'id'))
+                ->searchable(),
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
                 ->maxLength(25)
@@ -39,7 +44,6 @@ class ReservasiResource extends Resource
                 ->numeric(),
                 Forms\Components\TextInput::make('jumlah_pax')
                 ->label('Jumlah Pax')
-                ->maxLength(2)
                 ->required()
                 ->numeric(),
                 Forms\Components\Select::make('status')
@@ -57,6 +61,7 @@ class ReservasiResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('userID')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tanggal')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('waktu')->sortable()->searchable(),
