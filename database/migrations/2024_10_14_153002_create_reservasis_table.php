@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id('reservasiID');
+            $table->text('userID');
             $table->char('name', 25);
             $table->date('tanggal');
             $table->time('waktu');
             $table->bigInteger('meja');
             $table->integer('jumlah_pax');
             $table->char('status', 20);
-            // $table->text('userID');
             $table->timestamps();
         });
     }

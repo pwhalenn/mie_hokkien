@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id('pesananID');
+            $table->text('userID');
             $table->decimal('total_harga', 10, 2);
-            // $table->text('userID');
             $table->timestamps();
         });
     }

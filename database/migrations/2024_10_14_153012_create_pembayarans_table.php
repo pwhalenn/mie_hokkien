@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id('pembayaranID');
+            $table->text('userID');
+            $table->text('pesananID');
             $table->char('status', 20);
             $table->char('transaksiID', 6);
             $table->integer('gross_amount');
             $table->char('metode', 10);
-            // $table->text('userID');
-            // $table->text('pesananID');
             $table->timestamps();
         });
     }
