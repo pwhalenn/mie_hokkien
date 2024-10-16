@@ -49,6 +49,16 @@ class DatabaseSeeder extends Seeder
                 'status' => 'Reservasi Ditolak',
             ],
 
+            [
+                'userID' => '0004',
+                'name' => 'Anna',
+                'tanggal' => Carbon::now(),
+                'waktu' => Carbon::now(),
+                'meja' => '2',
+                'jumlah_pax' => '12',
+                'status' => 'Reservasi Diterima',
+            ],
+
         
         ]);
     }
