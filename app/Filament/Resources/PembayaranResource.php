@@ -52,6 +52,8 @@ class PembayaranResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('userID')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('pesananID')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('status')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('transaksiID')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('gross_amount')->sortable()->searchable(),
