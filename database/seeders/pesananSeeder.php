@@ -28,6 +28,14 @@ class pesananSeeder extends Seeder
             'userID' => 3,
             'total_harga' => 60000,
             ],
+            [
+            'userID' => 4,
+            'total_harga' => 65000,
+            ],
+            [
+            'userID' => 3,
+            'total_harga' => 80000,
+            ],
         ]);
     }
 }
