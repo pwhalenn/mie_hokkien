@@ -18,23 +18,23 @@ class pesananSeeder extends Seeder
         DB::table('pesanans')->insert([
             [
             'userID' => 1,
-            'total_harga' => 50000,
-            ],
-            [
-            'userID' => 2,
             'total_harga' => 45000,
             ],
             [
+            'userID' => 2,
+            'total_harga' => 30000,
+            ],
+            [
             'userID' => 3,
-            'total_harga' => 60000,
+            'total_harga' => 10000,
             ],
             [
             'userID' => 4,
-            'total_harga' => 65000,
+            'total_harga' => 100000,
             ],
             [
             'userID' => 5,
-            'total_harga' => 80000,
+            'total_harga' => 150000,
             ],
         ]);
     }
