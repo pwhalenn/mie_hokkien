@@ -12,7 +12,7 @@ class pesananSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('id_ID');
+        
         $userIDs = DB::table('users')->pluck('userID');
 
         DB::table('pesanans')->insert([
@@ -33,7 +33,7 @@ class pesananSeeder extends Seeder
             'total_harga' => 65000,
             ],
             [
-            'userID' => 3,
+            'userID' => 5,
             'total_harga' => 80000,
             ],
         ]);
