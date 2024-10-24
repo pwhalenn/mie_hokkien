@@ -1,21 +1,22 @@
 <?php
 
 namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\reservasi;
 use Carbon\Carbon;
 
-
-
-class DatabaseSeeder extends Seeder
+class reservasiSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-
-        User::factory()->create([
+        DB::table('reservasis')->insert([
             [
-                'userID' => '0001',
+                'user_id' => '0001',
                 'name' => 'Andi',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
             ],
 
             [
-                'userID' => '0002',
+                'user_id' => '0002',
                 'name' => 'Susan',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -35,7 +36,7 @@ class DatabaseSeeder extends Seeder
             ],
 
             [
-                'userID' => '0003',
+                'user_id' => '0003',
                 'name' => 'Michael',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -45,7 +46,7 @@ class DatabaseSeeder extends Seeder
             ],
 
             [
-                'userID' => '0004',
+                'user_id' => '0004',
                 'name' => 'Anna',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -53,8 +54,6 @@ class DatabaseSeeder extends Seeder
                 'jumlah_pax' => '12',
                 'status' => 'Reservasi Diterima',
             ],
-
-        
         ]);
     }
 }

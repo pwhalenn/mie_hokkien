@@ -4,7 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ItemPesananResource\Pages;
 use App\Filament\Resources\ItemPesananResource\RelationManagers;
-use App\Models\ItemPesanan;
+use App\Models\Item_Pesanan;
+use App\Models\Pesanan;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ItemPesananResource extends Resource
 {
-    protected static ?string $model = ItemPesanan::class;
+    protected static ?string $model = Item_Pesanan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,6 +24,10 @@ class ItemPesananResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('pesanan_id')
+                ->label('Pesanan ID')
+                ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
+                ->searchable(),
                 Forms\Components\TextInput::make('kuantitas')
                 ->label('Kuantitas')
                 ->maxLength(2)
@@ -42,6 +47,7 @@ class ItemPesananResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('kuantitas')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('harga')->sortable()->searchable(),

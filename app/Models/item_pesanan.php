@@ -9,7 +9,9 @@ class item_pesanan extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'pesanan_id',
         'kuantitas',
         'name',
-        'harga'];
+        'harga',
+    ];
 }

@@ -29,7 +29,7 @@ class ArtikelResource extends Resource
                 ->required(),
                 Forms\Components\TextInput::make('artikel')
                 ->label('Artikel')
-                ->maxLength(250)
+                ->maxLength(500)
                 ->required(),
             ]);
     }

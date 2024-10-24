@@ -9,10 +9,11 @@ class reservasi extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'name',
         'tanggal',
         'waktu',
         'meja',
         'jumlah_pax',
-        'status'];
+        'status',];
 }

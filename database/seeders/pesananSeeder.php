@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class pesananSeeder extends Seeder
 {
@@ -12,28 +13,25 @@ class pesananSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        $userIDs = DB::table('users')->pluck('userID');
-
         DB::table('pesanans')->insert([
             [
-            'userID' => 1,
+            'user_id' => 1,
             'total_harga' => 45000,
             ],
             [
-            'userID' => 2,
+            'user_id' => 2,
             'total_harga' => 30000,
             ],
             [
-            'userID' => 3,
+            'user_id' => 3,
             'total_harga' => 10000,
             ],
             [
-            'userID' => 4,
+            'user_id' => 4,
             'total_harga' => 100000,
             ],
             [
-            'userID' => 5,
+            'user_id' => 5,
             'total_harga' => 150000,
             ],
         ]);

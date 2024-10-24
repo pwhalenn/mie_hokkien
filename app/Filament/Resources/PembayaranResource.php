@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PembayaranResource\Pages;
 use App\Filament\Resources\PembayaranResource\RelationManagers;
 use App\Models\Pembayaran;
+use App\Models\User;
+use App\Models\Pesanan;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,6 +25,14 @@ class PembayaranResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                ->label('User ID')
+                ->options(User::all()->pluck('name', 'id'))
+                ->searchable(),
+                Forms\Components\Select::make('pesanan_id')
+                ->label('Pesanan ID')
+                ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
+                ->searchable(),
                 Forms\Components\Select::make('status')
                 ->options([
                     'Bayar' => 'Bayar',
@@ -30,7 +40,7 @@ class PembayaranResource extends Resource
                 ])
                 ->searchable()
                 ->native(false),
-                Forms\Components\TextInput::make('transaksiID')
+                Forms\Components\TextInput::make('transaksi_id')
                 ->label('Transaksi ID')
                 ->maxLength(6)
                 ->required(),
@@ -41,7 +51,7 @@ class PembayaranResource extends Resource
                 ->options([
                     'Cash' => 'Cash',
                     'Debit' => 'Debit',
-                    'Credit' => 'Credit',
+                    'QRIS' => 'QRIS',
                 ])
                 ->searchable()
                 ->native(false),
@@ -52,10 +62,10 @@ class PembayaranResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('userID')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('pesananID')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('user_id')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('status')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('transaksiID')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('transaksi_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('gross_amount')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('metode')->sortable()->searchable(),
             ])

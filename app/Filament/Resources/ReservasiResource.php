@@ -24,7 +24,7 @@ class ReservasiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('userID')
+                Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
                 ->searchable(),
@@ -61,7 +61,7 @@ class ReservasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('userID')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('user_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tanggal')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('waktu')->sortable()->searchable(),
