@@ -12,6 +12,8 @@ class pesanan extends Model
         'user_id',
         'total_harga',];
 
+    protected $primaryKey = 'pesanan_id';
+
     public function pembayarans()
     {
         return $this->hasMany(Pembayaran::class, 'pesanan_id', 'pesanan_id');

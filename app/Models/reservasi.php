@@ -16,4 +16,6 @@ class reservasi extends Model
         'meja',
         'jumlah_pax',
         'status',];
+    
+    protected $primaryKey = 'reservasi_id';
 }

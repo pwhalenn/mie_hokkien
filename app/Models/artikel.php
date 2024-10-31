@@ -11,4 +11,6 @@ class artikel extends Model
     protected $fillable = [
         'judul',
         'artikel',];
+    
+    protected $primaryKey = 'artikel_id';
 }

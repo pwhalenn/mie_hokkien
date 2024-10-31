@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,42 +12,46 @@ class itemPesananSeeder extends Seeder
      */
     public function run(): void
     {
+        $menuPrices = DB::table('menus')->whereIn('name', [
+            'Mie Hokkien', 'Sup Wonton', 'Ayam Kecap', 'Mie Pangsit', 'Tumis Taoge'
+        ])->pluck('total_harga', 'name');
+
         DB::table('item_pesanans')->insert([
             [
                 'pesanan_id' => 1,
                 'kuantitas' => 2,
-                'name' => 'Item A',
-                'harga' => 15000.00,
-            ],
-            [
-                'pesanan_id' => 1,
-                'kuantitas' => 1,
-                'name' => 'Item B',
-                'harga' => 30000.00,
+                'name' => 'Mie Hokkien',
+                'harga' => $menuPrices['Mie Hokkien'] * 2,
             ],
             [
                 'pesanan_id' => 2,
-                'kuantitas' => 3,
-                'name' => 'Item C',
-                'harga' => 10000.00,
+                'kuantitas' => 1,
+                'name' => 'Sup Wonton',
+                'harga' => $menuPrices['Sup Wonton'] * 1,
             ],
             [
                 'pesanan_id' => 3,
-                'kuantitas' => 5,
-                'name' => 'Item D',
-                'harga' => 20000.00,
+                'kuantitas' => 3,
+                'name' => 'Ayam Kecap',
+                'harga' => $menuPrices['Ayam Kecap'] * 3,
             ],
             [
                 'pesanan_id' => 4,
+                'kuantitas' => 5,
+                'name' => 'Mie Pangsit',
+                'harga' => $menuPrices['Mie Pangsit'] * 5,
+            ],
+            [
+                'pesanan_id' => 5,
                 'kuantitas' => 4,
-                'name' => 'Item E',
-                'harga' => 25000.00,
+                'name' => 'Tumis Taoge',
+                'harga' => $menuPrices['Tumis Taoge'] * 4,
             ],
             [
                 'pesanan_id' => 5,
                 'kuantitas' => 2,
-                'name' => 'Item F',
-                'harga' => 70000.00,
+                'name' => 'Mie Pangsit',
+                'harga' => $menuPrices['Mie Pangsit'] * 2,
             ],
         ]);
     }

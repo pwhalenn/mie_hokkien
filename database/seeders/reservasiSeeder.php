@@ -14,9 +14,9 @@ class reservasiSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('reservasis')->insert([
+        DB::table('reservasis')->insert([ // reservasi
             [
-                'user_id' => '0001',
+                'user_id' => 1,
                 'name' => 'Andi',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -26,7 +26,7 @@ class reservasiSeeder extends Seeder
             ],
 
             [
-                'user_id' => '0002',
+                'user_id' => 2,
                 'name' => 'Susan',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -36,7 +36,7 @@ class reservasiSeeder extends Seeder
             ],
 
             [
-                'user_id' => '0003',
+                'user_id' => 3,
                 'name' => 'Michael',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
@@ -46,7 +46,7 @@ class reservasiSeeder extends Seeder
             ],
 
             [
-                'user_id' => '0004',
+                'user_id' => 4,
                 'name' => 'Anna',
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),

@@ -13,50 +13,54 @@ class pembayaranSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        DB::table('pembayarans')->insert([
+    {   
+        $totalPrice = DB::table('pesanans')->whereIn('user_id', [
+            1, 2, 3, 4, 5
+        ])->pluck('total_harga', 'user_id');
+
+        DB::table('pembayarans')->insert([ // membayar
             [
-                'user_id' => 'U001',
-                'pesanan_id' => '0001',
+                'user_id' => 1,
+                'pesanan_id' => 1,
                 'status' => 'pembayaran berhasil',
                 'transaksi_id' => 'P001',
-                'gross_amount' => 45000,
+                'gross_amount' => $totalPrice[1],
                 'metode' => 'Cash',
             ],
 
             [
-                'user_id' => 'U002',
-                'pesanan_id' => '0002',
+                'user_id' => 2,
+                'pesanan_id' => 2,
                 'status' => 'pembayaran gagal',
                 'transaksi_id' => 'P002',
-                'gross_amount' => 30000,
+                'gross_amount' => $totalPrice[2],
                 'metode' => 'QRIS',
             ],
 
             [
-                'user_id' => 'U003',
-                'pesanan_id' => '0003',
+                'user_id' => 3,
+                'pesanan_id' => 3,
                 'status' => 'pembayaran berhasil',
                 'transaksi_id' => 'P003',
-                'gross_amount' => 10000,
+                'gross_amount' => $totalPrice[3],
                 'metode' => 'Cash',
             ],
 
             [
-                'user_id' => 'U004',
-                'pesanan_id' => '0004',
+                'user_id' => 4,
+                'pesanan_id' => 4,
                 'status' => 'pembayaran berhasil',
                 'transaksi_id' => 'P004',
-                'gross_amount' => 100000,
+                'gross_amount' => $totalPrice[4],
                 'metode' => 'Debit',
             ],
 
             [
-                'user_id' => 'U005',
-                'pesanan_id' => '0005',
+                'user_id' => 5,
+                'pesanan_id' => 5,
                 'status' => 'pembayaran gagal',
                 'transaksi_id' => 'P005',
-                'gross_amount' => 150000,
+                'gross_amount' => $totalPrice[5],
                 'metode' => 'QRIS',
             ],
 

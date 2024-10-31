@@ -5,12 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PesananResource\Pages;
 use App\Filament\Resources\PesananResource\RelationManagers;
 use App\Models\Pesanan;
+use App\Models\Item_Pesanan;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -28,10 +30,15 @@ class PesananResource extends Resource
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
                 ->searchable(),
+                    
                 Forms\Components\TextInput::make('total_harga')
-                ->label('Total_Harga')
-                ->maxLength(10)
-                ->required(),
+                ->label('Total Harga')
+                ->disabled()
+                ->default(fn($record) => $record 
+                    ? DB::table('item_pesanans')
+                        ->where('pesanan_id', $record->id)
+                        ->sum('harga') 
+                    : 0),
             ]);
     }
 

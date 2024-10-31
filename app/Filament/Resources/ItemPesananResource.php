@@ -6,6 +6,7 @@ use App\Filament\Resources\ItemPesananResource\Pages;
 use App\Filament\Resources\ItemPesananResource\RelationManagers;
 use App\Models\Item_Pesanan;
 use App\Models\Pesanan;
+use App\Models\Menu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -27,19 +28,30 @@ class ItemPesananResource extends Resource
                 Forms\Components\Select::make('pesanan_id')
                 ->label('Pesanan ID')
                 ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
-                ->searchable(),
+                ->searchable()
+                ->reactive()
+                ->afterStateUpdated(fn ($set, $get) => !$get('pesanan_id') ? $set('pesanan_id', Pesanan::create()->id) : null),
+                Forms\Components\Select::make('name')
+                ->label('Menu Item')
+                ->options(Menu::all()->pluck('name', 'name'))
+                ->searchable()
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($set, $get, $state) {
+                    $menu = Menu::where('name', $state)->first();
+                    $set('harga', $menu->total_harga * $get('kuantitas'));
+                }),
                 Forms\Components\TextInput::make('kuantitas')
-                ->label('Kuantitas')
-                ->maxLength(2)
-                ->required(),
-                Forms\Components\TextInput::make('name')
-                ->label('Name')
-                ->maxLength(25)
-                ->required(),
-                Forms\Components\TextInput::make('harga')
-                ->label('Harga')
-                ->maxLength(10)
-                ->required(),
+                ->label('Quantity')
+                ->numeric()
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($set, $get, $state) {
+                    $menu = Menu::where('name', $get('name'))->first();
+                    if ($menu) {
+                        $set('harga', $menu->total_harga * $state);
+                    }
+                }),
             ]);
     }
 

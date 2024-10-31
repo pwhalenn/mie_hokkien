@@ -12,4 +12,6 @@ class menu extends Model
         'name',
         'deskripsi',
         'total_harga',];
+    
+    protected $primaryKey = 'menu_id';
 }

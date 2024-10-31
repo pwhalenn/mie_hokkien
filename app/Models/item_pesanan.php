@@ -14,4 +14,6 @@ class item_pesanan extends Model
         'name',
         'harga',
     ];
+
+    protected $primaryKey = 'item_pesanan_id';
 }

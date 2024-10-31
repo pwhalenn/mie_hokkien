@@ -15,7 +15,7 @@ class menuSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        DB::table('menus')->insert([
+        DB::table('menus')->insert([ // untuk lihat menu aja
             [
                 'name' => 'Mie Hokkien',
                 'deskripsi' => 'Sebuah mahakarya orang hokkien dengan mie yang sangat enak.',

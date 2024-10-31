@@ -32,7 +32,11 @@ class PembayaranResource extends Resource
                 Forms\Components\Select::make('pesanan_id')
                 ->label('Pesanan ID')
                 ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
-                ->searchable(),
+                ->searchable()
+                ->reactive()
+                ->afterStateUpdated(fn (callable $set, $state) => 
+                    $set('gross_amount', Pesanan::where('id', $state)->value('total_harga'))
+                ),
                 Forms\Components\Select::make('status')
                 ->options([
                     'Bayar' => 'Bayar',
@@ -46,7 +50,8 @@ class PembayaranResource extends Resource
                 ->required(),
                 Forms\Components\TextInput::make('gross_amount')
                 ->label('Gross Amount')
-                ->required(),
+                ->required()
+                ->disabled(),
                 Forms\Components\Select::make('metode')
                 ->options([
                     'Cash' => 'Cash',
