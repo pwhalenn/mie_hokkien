@@ -14,31 +14,30 @@ class pesananSeeder extends Seeder
     {
         // Calculate total_harga for each pesanan_id
         $totals = DB::table('item_pesanans')
-            ->select('pesanan_id', DB::raw('SUM(harga) as total_harga'))
-            ->groupBy('pesanan_id')
-            ->pluck('total_harga', 'pesanan_id');
+            ->whereIn('pesanan_id', [1, 2, 3, 4, 5])
+            ->pluck('harga', 'name');
 
         // Prepare data to insert into pesanans
         $pesananData = [
             [
                 'user_id' => 1,
-                'total_harga' => $totals[1] ?? 0,
+                'total_harga' => $totals[1],
             ],
             [
                 'user_id' => 2,
-                'total_harga' => $totals[2] ?? 0,
+                'total_harga' => $totals[2],
             ],
             [
                 'user_id' => 3,
-                'total_harga' => $totals[3] ?? 0,
+                'total_harga' => $totals[3],
             ],
             [
                 'user_id' => 4,
-                'total_harga' => $totals[4] ?? 0,
+                'total_harga' => $totals[4],
             ],
             [
                 'user_id' => 5,
-                'total_harga' => $totals[5] ?? 0,
+                'total_harga' => $totals[5] + $totals[6],
             ],
         ];
 
