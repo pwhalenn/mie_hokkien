@@ -18,7 +18,7 @@
         <th>Name</th>
         <th>Tanggal</th>
         <th>Waktu</th>
-        <th>Metode</th>
+        <th>Meja</th>
         <th>Jumplah Pax</th>
         <th>Status</th>
         </tr>
@@ -29,7 +29,7 @@
                     <td>{{ $reservasis->name}}</td>
                     <td>{{ $reservasis->tanggal}}</td>
                     <td>{{ $reservasis->waktu}}</td>
-                    <td>{{ $reservasis->metode}}</td>
+                    <td>{{ $reservasis->meja}}</td>
                     <td>{{ $reservasis->jumlah_pax}}</td>
                     <td>{{ $reservasis->status}}</td>
                 </tr>

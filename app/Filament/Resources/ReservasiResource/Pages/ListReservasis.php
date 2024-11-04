@@ -28,7 +28,7 @@ class ListReservasis extends ListRecords
         // Ambil data reservasi
         $data = \App\Models\Reservasi::all();
         // Load view untuk cetak PDF
-        $pdf = \PDF::loadView('Laporan.cetak', ['data' => $data]);
+        $pdf = \PDF::loadView('Laporan.cetakreservasi', ['data' => $data]);
         // Unduh file PDF
         return response()->streamDownload(fn() => print($pdf->output()), 'laporan_reservasi.pdf');
     }

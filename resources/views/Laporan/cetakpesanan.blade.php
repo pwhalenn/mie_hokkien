@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Pembayaran</title>
+    <title>Laporan Pesanan</title>
     <style>
         body { font-family: Arial, sans-serif; }
         table { width: 100%; border-collapse: collapse; }
@@ -11,23 +11,25 @@
     </style>
 </head>
 <body>
-    <h2>Laporan Pembayaran</h2>
+    <h2>Laporan Pesanan</h2>
     <table>
         <thead>
         <tr>
-        <th>Status</th>
-        <th>Transaksi ID</th>
+        <th>Pesanan ID</th>
+        <th>Nama Menu</th>
+        <th>Kuantitas</th>
+        <th>Harga Menu</th>
         <th>Total Harga</th>
-        <th>Metode</th>
         </tr>
         </thead>
         <tbody>
-            @foreach($data as $pembayarans)
+            @foreach($data as $rows)
                 <tr>
-                    <td>{{ $pembayarans->status}}</td>
-                    <td>{{ $pembayarans->transaksi_id}}</td>
-                    <td>{{ $pembayarans->gross_amount}}</td>
-                    <td>{{ $pembayarans->metode}}</td>
+                    <td>{{ $rows->pesanan_id }}</td>
+                    <td>{{ $rows->name }}</td>
+                    <td>{{ $rows->kuantitas }}</td>
+                    <td>{{ $rows->harga }}</td>
+                    <td>{{ $rows->gross_amount }}</td>
                 </tr>
             @endforeach
         </tbody>

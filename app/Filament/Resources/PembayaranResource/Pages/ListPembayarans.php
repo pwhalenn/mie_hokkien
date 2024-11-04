@@ -28,7 +28,7 @@ class ListPembayarans extends ListRecords
         // Ambil data pengguna
         $data = \App\Models\Pembayaran::all();
         // Load view untuk cetak PDF
-        $pdf = \PDF::loadView('Laporan.cetak', ['data' => $data]);
+        $pdf = \PDF::loadView('Laporan.cetakpembayaran', ['data' => $data]);
         // Unduh file PDF
         return response()->streamDownload(fn() => print($pdf->output()), 'laporan_pembayaran.pdf');
     }
