@@ -39,7 +39,7 @@ class ArtikelResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('judul')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('artiekl')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('artikel')->sortable()->searchable(),
             ])
             ->filters([
                 //

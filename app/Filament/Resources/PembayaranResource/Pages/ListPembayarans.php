@@ -26,7 +26,8 @@ class ListPembayarans extends ListRecords
     public static function cetakLaporan()
     {
         // Ambil data pengguna
-        $data = \App\Models\Pembayaran::all();
+        // $data = \App\Models\Pembayaran::all();
+        $data = \DB::select('SELECT status, transaksi_id, gross_amount, metode FROM pembayarans');
         // Load view untuk cetak PDF
         $pdf = \PDF::loadView('Laporan.cetakpembayaran', ['data' => $data]);
         // Unduh file PDF

@@ -26,7 +26,8 @@ class ListReservasis extends ListRecords
     public static function cetakLaporan()
     {
         // Ambil data reservasi
-        $data = \App\Models\Reservasi::all();
+        // $data = \App\Models\Reservasi::all();
+        $data = \DB::select('SELECT name, tanggal, waktu, meja, jumlah_pax, status FROM reservasis');
         // Load view untuk cetak PDF
         $pdf = \PDF::loadView('Laporan.cetakreservasi', ['data' => $data]);
         // Unduh file PDF
