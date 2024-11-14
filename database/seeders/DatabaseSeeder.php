@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
             reservasiSeeder::class,
             menuSeeder::class,
             artikelSeeder::class,
-            itemPesananSeeder::class,
             pesananSeeder::class,
+            itemPesananSeeder::class,
             pembayaranSeeder::class,
         ]);
     }

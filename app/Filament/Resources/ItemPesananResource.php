@@ -22,37 +22,48 @@ class ItemPesananResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\Select::make('pesanan_id')
+{
+    return $form
+        ->schema([
+            Forms\Components\Select::make('pesanan_id')
                 ->label('Pesanan ID')
                 ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
                 ->searchable()
                 ->reactive()
                 ->afterStateUpdated(fn ($set, $get) => !$get('pesanan_id') ? $set('pesanan_id', Pesanan::create()->id) : null),
-                Forms\Components\Select::make('name')
+
+            Forms\Components\TextInput::make('kuantitas')
+                ->label('Quantity')
+                ->numeric()
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($set, $get, $state) {
+                    $menuName = $get('name');
+                    $menu = Menu::where('name', $menuName)->first();
+                    if ($menu) {
+                        $set('harga', $menu->total_harga * $state);
+                    }
+                }),
+
+            Forms\Components\Select::make('name')
                 ->label('Menu Item')
                 ->options(Menu::all()->pluck('name', 'name'))
                 ->searchable()
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function ($set, $get, $state) {
+                    $kuantitas = $get('kuantitas');
                     $menu = Menu::where('name', $state)->first();
-                    $set('harga', $menu->total_harga * $get('kuantitas'));
-                }),
-                Forms\Components\TextInput::make('kuantitas')
-                ->label('Quantity')
-                ->numeric()
-                ->required()
-                ->reactive()
-                ->afterStateUpdated(function ($set, $get, $state) {
-                    $menu = Menu::where('name', $get('name'))->first();
                     if ($menu) {
-                        $set('harga', $menu->total_harga * $state);
+                        $set('harga', $menu->total_harga * $kuantitas);
                     }
                 }),
-            ]);
+            Forms\Components\TextInput::make('harga')
+                ->label('Harga')
+                ->disabled()
+                ->numeric()
+                ->default(0),
+        ]);
     }
 
     public static function table(Table $table): Table
