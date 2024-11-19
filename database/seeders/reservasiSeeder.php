@@ -14,40 +14,42 @@ class reservasiSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('reservasis')->insert([ // reservasi
+        $users = DB::table('users')->get();
+        DB::table('reservasis')->insert([
             [
+                'reservasi_id' => 1,
                 'user_id' => 1,
-                'name' => 'Andi',
+                'name' => $users->where('id', 1)->first()->name,
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
                 'meja' => '2',
                 'jumlah_pax' => '10',
                 'status' => 'Reservasi Diterima',
             ],
-
             [
+                'reservasi_id' => 2,
                 'user_id' => 2,
-                'name' => 'Susan',
+                'name' => $users->where('id', 2)->first()->name,
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
                 'meja' => '1',
                 'jumlah_pax' => '5',
                 'status' => 'Reservasi Diterima',
             ],
-
             [
+                'reservasi_id' => 3,
                 'user_id' => 3,
-                'name' => 'Michael',
+                'name' => $users->where('id', 3)->first()->name,
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
                 'meja' => '3',
                 'jumlah_pax' => '15',
                 'status' => 'Reservasi Ditolak',
             ],
-
             [
+                'reservasi_id' => 4,
                 'user_id' => 4,
-                'name' => 'Anna',
+                'name' => $users->where('id', 4)->first()->name,
                 'tanggal' => Carbon::now(),
                 'waktu' => Carbon::now(),
                 'meja' => '2',

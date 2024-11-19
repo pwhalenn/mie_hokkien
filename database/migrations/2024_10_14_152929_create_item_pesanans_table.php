@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('item_pesanan_id');
             $table->unsignedBigInteger('pesanan_id');
-            $table->foreign('pesanan_id')->references('pesanan_id')->on('pesanans')->onDelete('cascade');
+            $table->foreign('pesanan_id')->references('id')->on('pesanans')->onDelete('cascade');
             $table->integer('kuantitas');
             $table->char('name', 25);
             $table->decimal('harga', 10, 2);

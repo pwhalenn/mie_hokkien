@@ -26,18 +26,18 @@ class PesananResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('pesanan_id')
+                ->label('Pesanan ID')
+                ->required(),
                 Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
                 ->searchable(),
-                    
                 Forms\Components\TextInput::make('total_harga')
                 ->label('Total Harga')
                 ->disabled()
                 ->default(fn($record) => $record 
-                    ? DB::table('item_pesanans')
-                        ->where('pesanan_id', $record->id)
-                        ->sum('harga') 
+                    ? $record->items()->sum('harga')
                     : 0),
             ]);
     }
@@ -46,6 +46,7 @@ class PesananResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('user_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('total_harga')->sortable()->searchable(),
             ])

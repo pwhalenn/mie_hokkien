@@ -20,6 +20,7 @@ class pembayaranSeeder extends Seeder
 
         DB::table('pembayarans')->insert([ // membayar
             [
+                'pembayaran_id' => 1, 
                 'user_id' => 1,
                 'pesanan_id' => 1,
                 'status' => 'pembayaran berhasil',
@@ -29,6 +30,7 @@ class pembayaranSeeder extends Seeder
             ],
 
             [
+                'pembayaran_id' => 2, 
                 'user_id' => 2,
                 'pesanan_id' => 2,
                 'status' => 'pembayaran gagal',
@@ -38,6 +40,7 @@ class pembayaranSeeder extends Seeder
             ],
 
             [
+                'pembayaran_id' => 3, 
                 'user_id' => 3,
                 'pesanan_id' => 3,
                 'status' => 'pembayaran berhasil',
@@ -47,6 +50,7 @@ class pembayaranSeeder extends Seeder
             ],
 
             [
+                'pembayaran_id' => 4, 
                 'user_id' => 4,
                 'pesanan_id' => 4,
                 'status' => 'pembayaran berhasil',
@@ -56,6 +60,7 @@ class pembayaranSeeder extends Seeder
             ],
 
             [
+                'pembayaran_id' => 5, 
                 'user_id' => 5,
                 'pesanan_id' => 5,
                 'status' => 'pembayaran gagal',

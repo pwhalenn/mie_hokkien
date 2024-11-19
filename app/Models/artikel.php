@@ -9,8 +9,7 @@ class artikel extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'artikel_id',
         'judul',
         'artikel',];
-    
-    protected $primaryKey = 'artikel_id';
 }

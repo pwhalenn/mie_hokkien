@@ -9,6 +9,7 @@ class reservasi extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'reservasi_id',
         'user_id',
         'name',
         'tanggal',
@@ -16,6 +17,4 @@ class reservasi extends Model
         'meja',
         'jumlah_pax',
         'status',];
-    
-    protected $primaryKey = 'reservasi_id';
 }

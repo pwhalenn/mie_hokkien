@@ -25,12 +25,28 @@ class ItemPesananResource extends Resource
 {
     return $form
         ->schema([
+            Forms\Components\TextInput::make('item_pesanan_id')
+                ->label('Item Pesanan ID')
+                ->required(),
+            
             Forms\Components\Select::make('pesanan_id')
-                ->label('Pesanan ID')
-                ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
-                ->searchable()
-                ->reactive()
-                ->afterStateUpdated(fn ($set, $get) => !$get('pesanan_id') ? $set('pesanan_id', Pesanan::create()->id) : null),
+            ->label('Pesanan ID')
+            ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
+            ->searchable()
+            ->reactive()
+            ->afterStateUpdated(function ($set, $get, $state, $record) {
+                if ($record && $record->pesanan_id != $state) {
+                    $oldPesanan = Pesanan::find($record->pesanan_id);
+                    if ($oldPesanan) {
+                        $oldPesanan->updateTotalHarga();
+                    }
+                }
+                $newPesanan = Pesanan::find($state);
+                if ($newPesanan) {
+                    $newPesanan->updateTotalHarga();
+                }
+            }),
+            
 
             Forms\Components\TextInput::make('kuantitas')
                 ->label('Quantity')
@@ -70,6 +86,7 @@ class ItemPesananResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('item_pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('kuantitas')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),

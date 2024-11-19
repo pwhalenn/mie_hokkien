@@ -23,6 +23,9 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('menu_id')
+                ->label('Menu ID')
+                ->required(),
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
                 ->maxLength(25)
@@ -42,6 +45,7 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('menu_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('total_harga')->sortable()->searchable(),

@@ -9,6 +9,7 @@ class pembayaran extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'pembayaran_id',
         'user_id',
         'pesanan_id',
         'status',
@@ -16,11 +17,4 @@ class pembayaran extends Model
         'gross_amount',
         'metode',
     ];
-
-    protected $primaryKey = 'pembayaran_id';
-
-    public function pesanan()
-    {
-        return $this->belongsTo(Pesanan::class, 'pesanan_id', 'pesanan_id');
-    }
 }

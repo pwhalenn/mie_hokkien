@@ -23,6 +23,9 @@ class ArtikelResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('artikel_id')
+                ->label('Artikel ID')
+                ->required(),
                 Forms\Components\TextInput::make('judul')
                 ->label('Judul')
                 ->maxLength(50)
@@ -38,6 +41,7 @@ class ArtikelResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('artikel_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('judul')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('artikel')->sortable()->searchable(),
             ])

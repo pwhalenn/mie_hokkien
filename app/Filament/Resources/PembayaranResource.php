@@ -25,6 +25,9 @@ class PembayaranResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('pembayaran_id')
+                ->label('Pembayaran ID')
+                ->required(),
                 Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
@@ -67,6 +70,7 @@ class PembayaranResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('pembayaran_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('user_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('pesanan_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('status')->sortable()->searchable(),

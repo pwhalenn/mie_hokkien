@@ -9,9 +9,8 @@ class menu extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'menu_id',
         'name',
         'deskripsi',
         'total_harga',];
-    
-    protected $primaryKey = 'menu_id';
 }
