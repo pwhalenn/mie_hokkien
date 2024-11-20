@@ -30,7 +30,7 @@ class ListPesanans extends ListRecords
         $data = DB::select('
             SELECT 
                 item_pesanans.pesanan_id,
-                pesanans.user_id,
+                users.name,
                 item_pesanans.name,
                 item_pesanans.kuantitas,
                 item_pesanans.harga,
@@ -39,6 +39,8 @@ class ListPesanans extends ListRecords
                 item_pesanans
             JOIN 
                 pesanans ON item_pesanans.pesanan_id = pesanans.pesanan_id
+            JOIN 
+                users ON users.name = users.name
         ');
         // Load view untuk cetak PDF
         $pdf = \PDF::loadView('Laporan.cetakpesanan', ['data' => $data]);

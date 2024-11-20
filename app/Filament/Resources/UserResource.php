@@ -29,10 +29,14 @@ class UserResource extends Resource
                 ->required(),
                 Forms\Components\TextInput::make('email')
                 ->label('Email')
+                ->email()
+                ->placeholder('example@gmail.com')
+                ->rules(['required', 'email', 'regex:/@gmail\.com$/'])
                 ->maxLength(50)
                 ->required(),
                 Forms\Components\TextInput::make('password')
                 ->label('Password')
+                ->password()
                 ->maxLength(15)
                 ->required(),
             ]);
@@ -44,7 +48,6 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('password')->sortable()->searchable(),
             ])
             ->filters([
                 //

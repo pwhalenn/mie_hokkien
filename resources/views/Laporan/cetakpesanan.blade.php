@@ -27,7 +27,7 @@
             @foreach($data as $rows)
                 <tr>
                     <td>{{ $rows->pesanan_id }}</td>
-                    <td>{{ $rows->user_id }}</td>
+                    <td>{{ $rows->name }}</td>
                     <td>{{ $rows->name }}</td>
                     <td>{{ $rows->kuantitas }}</td>
                     <td>{{ $rows->harga }}</td>
