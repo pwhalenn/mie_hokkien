@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('artikel_id');
+            $table->bigInteger('artikel_id')->unique();
             $table->string('judul', 50); 
             $table->string('artikel', 500);
             $table->timestamps();

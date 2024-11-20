@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('reservasi_id');
+            $table->bigInteger('reservasi_id')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->char('name', 25);

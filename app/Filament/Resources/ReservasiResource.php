@@ -26,11 +26,19 @@ class ReservasiResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('reservasi_id')
                 ->label('Reservasi ID')
-                ->required(),
+                ->required()
+                ->default(fn () => Reservasi::max('reservasi_id') + 1),
                 Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
-                ->searchable(),
+                ->searchable()
+                ->reactive()
+                ->afterStateUpdated(function (callable $set, $state) {
+                    $user = User::find($state);
+                    if ($user) {
+                        $set('name', $user->name);
+                    }
+                }),
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
                 ->maxLength(25)

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pesanan_id');
+            $table->bigInteger('pesanan_id')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->decimal('total_harga', 10, 2);
+            $table->decimal('total_harga', 10, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -17,4 +17,9 @@ class pembayaran extends Model
         'gross_amount',
         'metode',
     ];
+
+    public function pesanan()
+    {
+        return $this->belongsTo(Pesanan::class, 'pesanan_id');
+    }
 }

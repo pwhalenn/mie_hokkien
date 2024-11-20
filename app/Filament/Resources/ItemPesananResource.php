@@ -27,7 +27,8 @@ class ItemPesananResource extends Resource
         ->schema([
             Forms\Components\TextInput::make('item_pesanan_id')
                 ->label('Item Pesanan ID')
-                ->required(),
+                ->required()
+                ->default(fn () => Item_Pesanan::max('item_pesanan_id') + 1),
             
             Forms\Components\Select::make('pesanan_id')
             ->label('Pesanan ID')

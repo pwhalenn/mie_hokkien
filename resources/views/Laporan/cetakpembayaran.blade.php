@@ -16,18 +16,22 @@
         <thead>
         <tr>
         <th>Status</th>
+        <th>Pelanggan</th>
+        <th>Total Pesanan</th>
         <th>Transaksi ID</th>
         <th>Total Harga</th>
         <th>Metode</th>
         </tr>
         </thead>
         <tbody>
-            @foreach($data as $pembayarans)
+            @foreach($data as $rows)
                 <tr>
-                    <td>{{ $pembayarans->status}}</td>
-                    <td>{{ $pembayarans->transaksi_id}}</td>
-                    <td>{{ $pembayarans->gross_amount}}</td>
-                    <td>{{ $pembayarans->metode}}</td>
+                    <td>{{ $rows->status }}</td>
+                    <td>{{ $rows->customer_name }}</td>
+                    <td>{{ $rows->total_orders }}</td>
+                    <td>{{ $rows->transaksi_ids }}</td>
+                    <td>{{ $rows->total_gross_amount }}</td>
+                    <td>{{ $rows->metode_used }}</td>
                 </tr>
             @endforeach
         </tbody>

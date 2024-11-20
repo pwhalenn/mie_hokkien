@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PesananResource\Pages;
 use App\Filament\Resources\PesananResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\DB;
 
 class ListPesanans extends ListRecords
 {
@@ -29,6 +30,7 @@ class ListPesanans extends ListRecords
         $data = DB::select('
             SELECT 
                 item_pesanans.pesanan_id,
+                pesanans.user_id,
                 item_pesanans.name,
                 item_pesanans.kuantitas,
                 item_pesanans.harga,

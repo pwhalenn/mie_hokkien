@@ -27,19 +27,25 @@ class PembayaranResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('pembayaran_id')
                 ->label('Pembayaran ID')
-                ->required(),
+                ->required()
+                ->default(fn () => Pembayaran::max('pembayaran_id') + 1),
                 Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
-                ->searchable(),
+                ->searchable()
+                ->default(fn ($record) => $record ? $record->pesanan->user_id : null),
                 Forms\Components\Select::make('pesanan_id')
                 ->label('Pesanan ID')
                 ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
                 ->searchable()
                 ->reactive()
-                ->afterStateUpdated(fn (callable $set, $state) => 
-                    $set('gross_amount', Pesanan::where('id', $state)->value('total_harga'))
-                ),
+                ->afterStateUpdated(function (callable $set, $state) {
+                    $pesanan = Pesanan::find($state);
+                    if ($pesanan) {
+                        $set('user_id', $pesanan->user_id);
+                        $set('gross_amount', $pesanan->total_harga);
+                    }
+                }),
                 Forms\Components\Select::make('status')
                 ->options([
                     'Bayar' => 'Bayar',
@@ -54,7 +60,7 @@ class PembayaranResource extends Resource
                 Forms\Components\TextInput::make('gross_amount')
                 ->label('Gross Amount')
                 ->required()
-                ->disabled(),
+                ->default(fn ($record) => $record ? $record->pesanan->total_harga : null),
                 Forms\Components\Select::make('metode')
                 ->options([
                     'Cash' => 'Cash',

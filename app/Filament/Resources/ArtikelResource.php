@@ -25,7 +25,8 @@ class ArtikelResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('artikel_id')
                 ->label('Artikel ID')
-                ->required(),
+                ->required()
+                ->default(fn () => Artikel::max('artikel_id') + 1),
                 Forms\Components\TextInput::make('judul')
                 ->label('Judul')
                 ->maxLength(50)

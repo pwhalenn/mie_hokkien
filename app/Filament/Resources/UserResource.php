@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MenuResource\Pages;
-use App\Filament\Resources\MenuResource\RelationManagers;
-use App\Models\Menu;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MenuResource extends Resource
+class UserResource extends Resource
 {
-    protected static ?string $model = Menu::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,21 +23,17 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('menu_id')
-                ->label('Menu ID')
-                ->required()
-                ->default(fn () => Menu::max('menu_id') + 1),
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
-                ->maxLength(25)
+                ->maxLength(50)
                 ->required(),
-                Forms\Components\TextInput::make('deskripsi')
-                ->label('Deskripsi')
-                ->maxLength(150)
+                Forms\Components\TextInput::make('email')
+                ->label('Email')
+                ->maxLength(50)
                 ->required(),
-                Forms\Components\TextInput::make('total_harga')
-                ->label('Total Harga')
-                ->maxLength(10)
+                Forms\Components\TextInput::make('password')
+                ->label('Password')
+                ->maxLength(15)
                 ->required(),
             ]);
     }
@@ -46,10 +42,9 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('menu_id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('total_harga')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('password')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -74,9 +69,9 @@ class MenuResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMenus::route('/'),
-            'create' => Pages\CreateMenu::route('/create'),
-            'edit' => Pages\EditMenu::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

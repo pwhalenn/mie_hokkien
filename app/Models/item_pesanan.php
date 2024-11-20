@@ -22,7 +22,7 @@ class item_pesanan extends Model
     }
 
     protected static function booted()
-    {
+    {            
         static::saving(function ($itemPesanan) {
             $menu = Menu::where('name', $itemPesanan->name)->first();
             if ($menu) {
@@ -33,22 +33,18 @@ class item_pesanan extends Model
         parent::boot();
 
         static::saved(function ($itemPesanan) {
-            // Get the original pesanan_id before the update
             $originalPesananId = $itemPesanan->getOriginal('pesanan_id');
 
-            // If the pesanan_id has changed, update both old and new pesanan
             if ($originalPesananId != $itemPesanan->pesanan_id) {
                 $oldPesanan = Pesanan::find($originalPesananId);
                 if ($oldPesanan) {
-                    $oldPesanan->updateTotalHarga();  // Recalculate total for old pesanan
+                    $oldPesanan->updateTotalHarga();
                 }
-
                 $newPesanan = Pesanan::find($itemPesanan->pesanan_id);
                 if ($newPesanan) {
-                    $newPesanan->updateTotalHarga();  // Recalculate total for new pesanan
+                    $newPesanan->updateTotalHarga();
                 }
             } else {
-                // If pesanan_id hasn't changed, just update the current pesanan
                 $pesanan = $itemPesanan->pesanan;
                 if ($pesanan) {
                     $pesanan->updateTotalHarga();
@@ -56,11 +52,10 @@ class item_pesanan extends Model
             }
         });
 
-        // Handle recalculating total_harga when item_pesanan is deleted
         static::deleted(function ($itemPesanan) {
             $pesanan = $itemPesanan->pesanan;
-            if ($pesanan) {
-                $pesanan->updateTotalHarga();
+            if ($pesanan && $pesanan->itemPesanans()->count() === 0) {
+                $pesanan->delete();
             }
         });
     }

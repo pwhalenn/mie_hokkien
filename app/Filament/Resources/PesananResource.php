@@ -28,7 +28,8 @@ class PesananResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('pesanan_id')
                 ->label('Pesanan ID')
-                ->required(),
+                ->required()
+                ->default(fn () => Pesanan::max('pesanan_id') + 1),
                 Forms\Components\Select::make('user_id')
                 ->label('User ID')
                 ->options(User::all()->pluck('name', 'id'))
