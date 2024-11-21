@@ -24,7 +24,9 @@ class ReservasiResource extends Resource
 {
     protected static ?string $model = Reservasi::class;
 
+    protected static ?string $navigationLabel = 'Daftar Reservasi';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
     public static function form(Form $form): Form
     {

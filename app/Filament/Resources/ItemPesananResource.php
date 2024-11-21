@@ -25,7 +25,9 @@ class ItemPesananResource extends Resource
 {
     protected static ?string $model = Item_Pesanan::class;
 
+    protected static ?string $navigationLabel = 'Daftar Item Pesanan';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
     public static function form(Form $form): Form
 {
