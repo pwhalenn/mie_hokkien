@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PesananResource\Pages;
 use App\Filament\Resources\PesananResource\RelationManagers;
+use App\Imports\pesananImport;
 use App\Models\Pesanan;
 use App\Models\Item_Pesanan;
 use App\Models\User;
@@ -15,6 +16,11 @@ use Filament\Tables\Table;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
+use Maatwebsite\Excel\Facades\Excel;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Support\Facades\Storage;
+use Filament\Notifications\Notification;
 
 class PesananResource extends Resource
 {
@@ -56,6 +62,34 @@ class PesananResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+            ])
+            ->headerActions([
+                Action::make('importExcel')
+                    ->label('Import Excel')
+                    ->action(function (array $data) {
+                        // Pastikan $data['file'] adalah jalur yang valid di storage
+
+                        $filePath = storage_path('app/public/' . $data['file']);
+
+                        // Import file menggunakan jalur absolut
+                        Excel::import(new pesananImport, $filePath);
+                        // Tampilkan notifikasi sukses
+                        Notification::make()
+                            ->title('Data berhasil diimpor!')
+                            ->success()
+                            ->send();
+                })
+                ->form([
+                    FileUpload::make('file')
+                        ->label('Pilih File Excel')
+                        ->disk('public') // Pastikan disimpan di disk 'public'
+                        ->directory('imports')
+                        ->acceptedFileTypes(['application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'])
+                        ->required(),
+                ])
+                ->modalHeading('Import Data Pesanan')
+                ->modalButton('Import')
+                ->color('success'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

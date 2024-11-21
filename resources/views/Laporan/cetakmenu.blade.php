@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h2>Laporan Reservasi</h2>
+    <h2>Laporan Menu</h2>
     <table>
         <thead>
         <tr>

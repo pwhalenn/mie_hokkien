@@ -29,18 +29,18 @@ class ListPesanans extends ListRecords
         // Ambil data pengguna
         $data = DB::select('
             SELECT 
-                item_pesanans.pesanan_id,
-                users.name,
-                item_pesanans.name,
-                item_pesanans.kuantitas,
-                item_pesanans.harga,
-                pesanans.total_harga
+                item_pesanans.pesanan_id AS pesanan_id,
+                users.name AS pelanggan,
+                item_pesanans.name AS nama_menu,
+                item_pesanans.kuantitas AS kuantitas,
+                item_pesanans.harga AS total_harga
             FROM 
                 item_pesanans
             JOIN 
                 pesanans ON item_pesanans.pesanan_id = pesanans.pesanan_id
             JOIN 
-                users ON users.name = users.name
+                users ON pesanans.user_id = users.id
+            LIMIT 100
         ');
         // Load view untuk cetak PDF
         $pdf = \PDF::loadView('Laporan.cetakpesanan', ['data' => $data]);

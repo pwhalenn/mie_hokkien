@@ -19,7 +19,6 @@
         <th>Pelanggan</th>
         <th>Nama Menu</th>
         <th>Kuantitas</th>
-        <th>Harga Menu</th>
         <th>Total Harga</th>
         </tr>
         </thead>
@@ -27,10 +26,9 @@
             @foreach($data as $rows)
                 <tr>
                     <td>{{ $rows->pesanan_id }}</td>
-                    <td>{{ $rows->name }}</td>
-                    <td>{{ $rows->name }}</td>
+                    <td>{{ $rows->pelanggan }}</td>
+                    <td>{{ $rows->nama_menu }}</td>
                     <td>{{ $rows->kuantitas }}</td>
-                    <td>{{ $rows->harga }}</td>
                     <td>{{ $rows->total_harga }}</td>
                 </tr>
             @endforeach
