@@ -38,8 +38,7 @@ class ListUsers extends ListRecords
                 GROUP_CONCAT(DISTINCT pesanans.pesanan_id SEPARATOR ", ") AS pesanan_ids,
                 GROUP_CONCAT(DISTINCT item_pesanans.name SEPARATOR ", ") AS nama_menu,
                 GROUP_CONCAT(DISTINCT item_pesanans.kuantitas SEPARATOR ", ") AS kuantitas,
-                GROUP_CONCAT(DISTINCT item_pesanans.harga SEPARATOR ", ") AS harga_menu,
-                SUM(item_pesanans.harga * item_pesanans.kuantitas) AS total_harga,
+                GROUP_CONCAT(DISTINCT item_pesanans.harga SEPARATOR ", ") AS total_harga,
                 pembayarans.metode AS metode_pembayaran,
                 pembayarans.status AS status_pembayaran
             FROM 

@@ -5,49 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Data Pelanggan</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .user-block { border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; }
+        .user-block h3 { margin: 0; }
+        .user-block p { margin: 5px 0; }
+        .order-list { padding-left: 20px; }
+        .order-item { margin-bottom: 10px; }
+        .order-header { font-weight: bold; }
+        .total { font-weight: bold; }
     </style>
 </head>
 <body>
     <h2>Laporan Data Pelanggan</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User ID</th>
-                <th>Email</th>
-                <th>Nama</th>
-                <th>Tanggal Reservasi</th>
-                <th>No Reservasi Meja</th>
-                <th>Jumlah Orang (Pax)</th>
-                <th>Pesanan</th>
-                <th>Kuantitas Pesanan</th>
-                <th>@</th>
-                <th>Total Harga</th>
-                <th>Metode Pembayaran</th>
-                <th>Status Pembayaran</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $row)
-                <tr>
-                    <td>{{ $row->user_id }}</td>
-                    <td>{{ $row->email }}</td>
-                    <td>{{ $row->pelanggan }}</td>
-                    <td>{{ $row->tanggal_reservasi }}</td>
-                    <td>{{ $row->no_reservasi_meja }}</td>
-                    <td>{{ $row->jumlah_orang }}</td>
-                    <td>{{ $row->pesanan_ids }}</td>
-                    <td>{{ $row->nama_menu }}</td>
-                    <td>{{ $row->kuantitas }}</td>
-                    <td>{{ $row->harga_menu }}</td>
-                    <td>{{ $row->total_harga }}</td>
-                    <td>{{ $row->metode_pembayaran }}</td>
-                    <td>{{ $row->status_pembayaran }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    
+    @foreach($data as $row)
+        <div class="user-block">
+            <h3>{{ $row->pelanggan }} (User ID: {{ $row->user_id }})</h3>
+            <p>Email: {{ $row->email }}</p>
+            <p>Tanggal Reservasi: {{ $row->tanggal_reservasi }}</p>
+            <p>No Reservasi Meja: {{ $row->no_reservasi_meja }}</p>
+            <p>Jumlah Orang (Pax): {{ $row->jumlah_orang }}</p>
+
+            <div class="order-list">
+                <div class="order-item">
+                    <p class="order-header">Pesanan:</p>
+                    <p>{{ $row->pesanan_ids }}</p>
+                </div>
+
+                <div class="order-item">
+                    <p class="order-header">Nama Menu:</p>
+                    <p>{{ $row->nama_menu }}</p>
+                </div>
+
+                <div class="order-item">
+                    <p class="order-header">Kuantitas Pesanan:</p>
+                    <p>{{ $row->kuantitas }}</p>
+                </div>
+                
+                <div class="order-item">
+                    <p class="total">Total Harga: {{ $row->total_harga }}</p>
+                </div>
+
+                <div class="order-item">
+                    <p class="order-header">Metode Pembayaran:</p>
+                    <p>{{ $row->metode_pembayaran }}</p>
+                </div>
+
+                <div class="order-item">
+                    <p class="order-header">Status Pembayaran:</p>
+                    <p>{{ $row->status_pembayaran }}</p>
+                </div>
+            </div>
+        </div>
+    @endforeach
 </body>
 </html>
