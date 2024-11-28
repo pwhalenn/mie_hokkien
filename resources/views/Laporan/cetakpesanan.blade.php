@@ -16,9 +16,7 @@
         <thead>
         <tr>
         <th>Pesanan ID</th>
-        <th>Pelanggan</th>
-        <th>Nama Menu</th>
-        <th>Kuantitas</th>
+        <th>User ID</th>
         <th>Total Harga</th>
         </tr>
         </thead>
@@ -26,9 +24,7 @@
             @foreach($data as $rows)
                 <tr>
                     <td>{{ $rows->pesanan_id }}</td>
-                    <td>{{ $rows->pelanggan }}</td>
-                    <td>{{ $rows->nama_menu }}</td>
-                    <td>{{ $rows->kuantitas }}</td>
+                    <td>{{ $rows->user_id }}</td>
                     <td>{{ $rows->total_harga }}</td>
                 </tr>
             @endforeach

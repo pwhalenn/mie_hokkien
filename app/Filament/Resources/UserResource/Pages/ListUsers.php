@@ -14,17 +14,37 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(), // Tombol New
             Actions\Action::make('cetak_laporan')
-            ->label('Cetak Laporan')
+            ->label('Cetak User')
             ->icon('heroicon-o-printer')
             ->action(fn() => static::cetakLaporan())
             ->requiresConfirmation()
-            ->modalHeading('Cetak Laporan Data Pelanggan')
-            ->modalSubheading('Apakah Anda yakin ingin mencetak data pelanggan?'),
+            ->modalHeading('Cetak Laporan User')
+            ->modalSubheading('Apakah Anda yakin ingin mencetak data user?'),
+
+            Actions\Action::make('cetak_laporan_lengkap')
+            ->label('Cetak User Lengkap')
+            ->icon('heroicon-o-printer')
+            ->action(fn() => static::cetakLaporanLengkap())
+            ->requiresConfirmation()
+            ->modalHeading('Cetak Laporan User Lengkap')
+            ->modalSubheading('Apakah Anda yakin ingin mencetak data user lengkap?'),
+
+            Actions\CreateAction::make(), // Tombol New
         ];
     }
+
     public static function cetakLaporan()
+    {
+        // Ambil data pengguna
+        $data = \App\Models\User::all();
+        // Load view untuk cetak PDF
+        $pdf = \PDF::loadView('Laporan.cetakpelanggan', ['data' => $data]);
+        // Unduh file PDF
+        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_user.pdf');
+    }
+
+    public static function cetakLaporanLengkap()
     {
         // Ambil data pengguna
         $data = DB::select('
@@ -57,9 +77,9 @@ class ListUsers extends ListRecords
         ');
         
         // Load view untuk cetak PDF
-        $pdf = \PDF::loadView('Laporan.cetakpelanggan', ['data' => $data]);
+        $pdf = \PDF::loadView('Laporan.cetakpelangganlengkap', ['data' => $data]);
 
         // Unduh file PDF
-        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_pelanggan.pdf');
+        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_user_lengkap.pdf');
     }
 }

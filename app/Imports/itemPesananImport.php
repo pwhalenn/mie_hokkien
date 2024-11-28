@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\itemPesanan;
+use App\Models\item_pesanan;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class itemPesananImport implements ToModel
@@ -17,7 +17,7 @@ class itemPesananImport implements ToModel
     {
         $this->rowCount++;
         if($this->rowCount>1 && isset($row[0])){
-        return new itemPesanan([
+        return new item_Pesanan([
             'item_pesanan_id' => $row[0],
             'pesanan_id' => $row[1],
             'kuantitas' => $row[2],

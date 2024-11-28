@@ -13,7 +13,25 @@ class ListArtikels extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\Action::make('cetak_laporan')
+            ->label('Cetak Artikel')
+            ->icon('heroicon-o-document-text')
+            ->action(fn() => static::cetakLaporan())
+            ->requiresConfirmation()
+            ->modalHeading('Cetak Laporan Data Artikel')
+            ->modalSubheading('Apakah Anda yakin ingin mencetak data artikel?'),
+
+            Actions\CreateAction::make(), // Tombol New
         ];
+    }
+
+    public static function cetakLaporan()
+    {
+        // Ambil data pengguna
+        $data = \App\Models\Artikel::all();
+        // Load view untuk cetak PDF
+        $pdf = \PDF::loadView('Laporan.cetakartikel', ['data' => $data]);
+        // Unduh file PDF
+        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_artikel.pdf');
     }
 }

@@ -13,14 +13,15 @@ class ListReservasis extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(), // Tombol New
             Actions\Action::make('cetak_laporan')
-            ->label('Cetak Laporan')
+            ->label('Cetak Reservasi')
             ->icon('heroicon-o-printer')
             ->action(fn() => static::cetakLaporan())
             ->requiresConfirmation()
             ->modalHeading('Cetak Laporan Reservasi')
-            ->modalSubheading('Apakah Anda yakin ingin mencetak laporan?'),
+            ->modalSubheading('Apakah Anda yakin ingin mencetak laporan reservasi?'),
+
+            Actions\CreateAction::make(), // Tombol New
         ];
     }
     public static function cetakLaporan()

@@ -14,20 +14,39 @@ class ListPembayarans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(), // Tombol New
             Actions\Action::make('cetak_laporan')
-            ->label('Cetak Laporan')
+            ->label('Cetak Pembayaran')
             ->icon('heroicon-o-printer')
             ->action(fn() => static::cetakLaporan())
             ->requiresConfirmation()
             ->modalHeading('Cetak Laporan Pembayaran')
-            ->modalSubheading('Apakah Anda yakin ingin mencetak laporan?'),
+            ->modalSubheading('Apakah Anda yakin ingin mencetak laporan pembayaran?'),
+
+            Actions\Action::make('cetak_laporan_lengkap')
+            ->label('Cetak Pembayaran Lengkap')
+            ->icon('heroicon-o-printer')
+            ->action(fn() => static::cetakLaporanPembayaranLengkap())
+            ->requiresConfirmation()
+            ->modalHeading('Cetak Laporan Pembayaran Lengkap')
+            ->modalSubheading('Apakah Anda yakin ingin mencetak laporan pembayaran lengkap?'),
+
+            Actions\CreateAction::make(), // Tombol New
         ];
     }
+
     public static function cetakLaporan()
     {
         // Ambil data pengguna
-        // $data = \App\Models\Pembayaran::all();
+        $data = \App\Models\Pembayaran::all();
+        // Load view untuk cetak PDF
+        $pdf = \PDF::loadView('Laporan.cetakpembayaran', ['data' => $data]);
+        // Unduh file PDF
+        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_pembayaran.pdf');
+    }
+
+    public static function cetakLaporanPembayaranLengkap()
+    {
+        // Ambil data pengguna
         $data = DB::select('
             SELECT 
                 pesanans.user_id, 
@@ -47,8 +66,8 @@ class ListPembayarans extends ListRecords
                 pesanans.user_id, users.name;
         ');
         // Load view untuk cetak PDF
-        $pdf = \PDF::loadView('Laporan.cetakpembayaran', ['data' => $data]);
+        $pdf = \PDF::loadView('Laporan.cetakpembayaranlengkap', ['data' => $data]);
         // Unduh file PDF
-        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_pembayaran.pdf');
+        return response()->streamDownload(fn() => print($pdf->output()), 'laporan_data_pembayaran_lengkap.pdf');
     }
 }

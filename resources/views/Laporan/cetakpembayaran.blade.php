@@ -15,9 +15,9 @@
     <table>
         <thead>
         <tr>
+        <th>User ID</th>
+        <th>Pesanan ID</th>
         <th>Status</th>
-        <th>Pelanggan</th>
-        <th>Total Pesanan</th>
         <th>Transaksi ID</th>
         <th>Total Harga</th>
         <th>Metode</th>
@@ -26,12 +26,12 @@
         <tbody>
             @foreach($data as $rows)
                 <tr>
+                    <td>{{ $rows->user_id }}</td>
+                    <td>{{ $rows->pesanan_id }}</td>
                     <td>{{ $rows->status }}</td>
-                    <td>{{ $rows->customer_name }}</td>
-                    <td>{{ $rows->total_orders }}</td>
-                    <td>{{ $rows->transaksi_ids }}</td>
-                    <td>{{ $rows->total_gross_amount }}</td>
-                    <td>{{ $rows->metode_used }}</td>
+                    <td>{{ $rows->transaksi_id }}</td>
+                    <td>{{ $rows->gross_amount }}</td>
+                    <td>{{ $rows->metode }}</td>
                 </tr>
             @endforeach
         </tbody>

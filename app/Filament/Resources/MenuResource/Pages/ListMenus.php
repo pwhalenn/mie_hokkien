@@ -13,7 +13,6 @@ class ListMenus extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(), // Tombol New
             Actions\Action::make('cetak_menu')
             ->label('Cetak Menu')
             ->icon('heroicon-o-printer')
@@ -21,12 +20,13 @@ class ListMenus extends ListRecords
             ->requiresConfirmation()
             ->modalHeading('Cetak Menu')
             ->modalSubheading('Apakah Anda yakin ingin mencetak menu?'),
+
+            Actions\CreateAction::make(), // Tombol New
         ];
     }
     public static function cetakMenu()
     {
         // Ambil data pengguna
-        // $data = \App\Models\Pembayaran::all();
         $data = \DB::select('SELECT name, deskripsi, total_harga FROM menus');
         // Load view untuk cetak PDF
         $pdf = \PDF::loadView('Laporan.cetakmenu', ['data' => $data]);
