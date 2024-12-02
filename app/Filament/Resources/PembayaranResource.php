@@ -44,7 +44,9 @@ class PembayaranResource extends Resource
                 ->default(fn ($record) => $record ? $record->pesanan->user_id : null),
                 Forms\Components\Select::make('pesanan_id')
                 ->label('Pesanan ID')
-                ->options(Pesanan::all()->pluck('pesanan_id', 'id'))
+                ->options(Pesanan::whereNotIn('id', function ($query) {
+                    $query->select('pesanan_id')->from('pembayarans');
+                })->pluck('pesanan_id', 'id'))
                 ->searchable()
                 ->reactive()
                 ->afterStateUpdated(function (callable $set, $state) {
