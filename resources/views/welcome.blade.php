@@ -21,7 +21,7 @@
             <!-- Articles Section -->
             <div class="md:col-span-2">
                 <h2 class="text-2xl font-bold mb-4">Latest Articles</h2>
-                @forelse($articles as $article)
+                @forelse($articles as $articles)
                     <div class="bg-white shadow-md rounded-lg p-4 mb-4">
                         <h3 class="text-xl font-semibold">{{ $article->title }}</h3>
                         <p class="text-gray-700 text-sm mt-2">{{ Str::limit($article->content, 100, '...') }}</p>
